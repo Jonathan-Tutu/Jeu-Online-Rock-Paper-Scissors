@@ -31,7 +31,7 @@ private slots:
     void Inscription();
     void ValidInscription();
     void ValiderConnexion();
-    void BoutonCancel();
+    void BoutonCancelConnexion();
     void BoutonCancelInscrip();
 
 private:

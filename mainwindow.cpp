@@ -17,35 +17,34 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->BoutonQuitter,SIGNAL(clicked()), qApp, SLOT(quit()));
     connect(ui->BoutonConnexion,SIGNAL(clicked()),this,SLOT(Connexion()));
 
+    connect(ui->ConnexionLogin,SIGNAL(clicked()),this, SLOT(ValiderConnexion()));
+    connect(ui->CancelLogin,SIGNAL(clicked()),this, SLOT(BoutonCancelConnexion()));
+
 }
 
 void MainWindow::Connexion()
 {
-
     ui->stackedWidget->setCurrentIndex(1);
-
-
 }
 
 void MainWindow::ValiderConnexion()
 {
-    //QDesktopServices::openUrl(QUrl("C:\\Users\\Jonathan\\Desktop\\build-IHM_CLIENT_V2-Desktop_Qt_5_15_0_MinGW_64_bit-Release\\release\\IHM_CLIENT_V2.exe"));
+    QDesktopServices::openUrl(QUrl::fromLocalFile("C:\\Users\\Jonathan\\Desktop\\build-IHM_CLIENT_V2-Desktop_Qt_5_15_0_MinGW_64_bit-Release\\release\\IHM_CLIENT_V2.exe"));
 }
 
-void MainWindow::BoutonCancel()
+void MainWindow::BoutonCancelConnexion()
 {
-
+    ui->stackedWidget->setCurrentIndex(0);
 }
 
 void MainWindow::Inscription()
 {
-   this->hide();
+    ui->stackedWidget->setCurrentIndex(2);
 }
 
 void MainWindow::BoutonCancelInscrip()
 {
-    this->show();
-    FenetInscrip->hide();
+    ui->stackedWidget->setCurrentIndex(0);
 }
 
 void MainWindow::ValidInscription()
@@ -57,27 +56,13 @@ void MainWindow::ValidInscription()
         {
             if(Mdp->text() == MdpConfir->text() && !Mdp->text().isEmpty() && !MdpConfir->text().isEmpty())
             {
-                masocket->connectToHost("51.178.47.159",6500); //51.178.47.159
-                if (masocket->waitForConnected(1000))
-                {
-                    qDebug() << "Connected";
-
                     QByteArray MotDePasseNonCrypte = Mdp->text().toStdString().c_str();
                     //Cryptage sha1 mot de passe
                     QString MotDePasseCrypte = QCryptographicHash::hash((MotDePasseNonCrypte),QCryptographicHash::Sha1); //Mdp stocké dans la BDD
 
-                    masocket->write(Login->text().toStdString().c_str());
-                    QThread::msleep(100);
-                    masocket->write(Mail->text().toStdString().c_str());
-                    QThread::msleep(100);
-                    masocket->write(MotDePasseCrypte.toStdString().c_str());
+
 
                     QMessageBox::information(this, "Compte", "Votre compte à été crée");
-                }
-                else
-                {
-                    qDebug() << "Disconnected";
-                }
             }
             else
             {
