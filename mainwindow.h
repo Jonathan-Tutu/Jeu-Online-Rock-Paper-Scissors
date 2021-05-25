@@ -10,8 +10,6 @@
 #include <QMessageBox>
 #include <QDesktopServices>
 #include <QUrl>
-#include <QUiLoader>
-#include <QFile>
 
 
 QT_BEGIN_NAMESPACE
@@ -29,21 +27,16 @@ public:
 private slots:
     void Connexion();
     void Inscription();
+
     void ValidInscription();
     void ValiderConnexion();
+
     void BoutonCancelConnexion();
     void BoutonCancelInscrip();
 
 private:
     Ui::MainWindow *ui;
-    QPushButton *Valider;
-    QPushButton *Cancel;
-    QLineEdit *Login;
-    QLineEdit *Mail;
-    QLineEdit *Mdp;
-    QLineEdit *MdpConfir;
-    QDialog *FenetLogin;
-    QDialog *FenetInscrip;
     QTcpSocket *masocket;
 };
+
 #endif // MAINWINDOW_H

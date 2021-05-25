@@ -1,4 +1,5 @@
-#include "Connexion.h"
+#include "mainwindow.h"
+#include "gestionbdd.h"
 
 #include <QApplication>
 #include <QSharedMemory>
@@ -6,6 +7,10 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+
+    GestionBDD test;
+
+    test.ConnexionBDD();
 
     QSharedMemory sharedMemory("{69B55631-A712-4d8c-8852-A8ED297EF439}"); //On donne un GUID à l'espace mémoire histoire qu'il soit unique
 
